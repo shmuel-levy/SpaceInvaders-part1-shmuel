@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+   background-color: #111011;
+    color: white;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;
+    width: 100vw; */
+}
+
+/* h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+} */
+
+.cell {
+    width: 60px;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.board-container {
+    margin: 39px auto;
+    border: 2px solid #fff;
+    border-collapse: separate;
+    border-spacing: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    /* max-height: 70vh;
+    max-width: 110vh; */
+    overflow: hidden;
+}
+
+.menu {
+    /* width: 100vh;
+    max-width: 800px;
+    height: 80vh;
+    max-height: 400px; */
+    background-color: rgb(124, 0, 128);
+    font-size: 32px;
+    border: 1px solid white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    background-color: #111011;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 40px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #ff0000;
+}
+
+.aliens-count {
+    color: green;
+}
+
+
+.floor {
+    background-color: rgb(180, 19, 19);
+}
+
