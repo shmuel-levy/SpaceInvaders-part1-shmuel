@@ -7,7 +7,7 @@ body {
 }
 
 body {
-  background-image: url("../images/stars.jpeg");
+  background-image: url("stars.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
