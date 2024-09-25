@@ -42,18 +42,22 @@ function shoot(playerPos) {
     if (gHero.isShoot) return
     gHero.isShoot = true
     var laserPos = { i: playerPos.i - 1, j: playerPos.j }
-    
+    shootSound.play()
+
     gLaserInterval = setInterval(() => {
         updateCell(gBoard, laserPos, SKY)
         laserPos.i--
-        if (laserPos.i < 0 || gBoard[laserPos.i][laserPos.j] === INVADER) {
+        if (laserPos.i < 0) {
             clearInterval(gLaserInterval)
             gHero.isShoot = false
-            if (laserPos.i >= 0 && gBoard[laserPos.i][laserPos.j] === INVADER) {
-                handleAlienHit(gBoard, laserPos)
-            }
             return
         }
-        updateCell(gBoard, laserPos, LASER)
+        if (gBoard[laserPos.i][laserPos.j] === INVADER) {
+            handleAlienHit(gBoard, laserPos)
+            clearInterval(gLaserInterval)
+            gHero.isShoot = false
+            return
+        }
+        updateCell(gBoard, laserPos, LASER);
     }, 100)
 }

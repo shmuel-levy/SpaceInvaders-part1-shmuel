@@ -1,7 +1,11 @@
 'use strict'
+
 var gGame
 var gBoard
 var gInvadersInterval
+var shootSound = new Audio('blaster-2-81267.mp3')
+var backgroundMusic = new Audio("invasion-march-star-wars-style-cinematic-music-219585.mp3")
+
 function init() {
     showMenu()
 }
@@ -23,13 +27,14 @@ function startGame() {
     updateScore(gGame.score)
 
     gAliensTopRow = 0
-    gAliensBottomRow = ALIEN_POINTS - 1
-    gAlienDirection = 'right'
+    gAliensBottomRow = ALIEN_ROW_COUNT - 1
+    gAlienMoveDirection = 'right'
     gIsAlienFreeze = false
 
     if (gInvadersInterval)
     clearInterval(gInvadersInterval)
     gInvadersInterval = setInterval(moveInvaders, ALIEN_SPEED)
+    backgroundMusic.play()
 }
 
 function buildBoard() {
@@ -38,20 +43,19 @@ function buildBoard() {
         board.push([])
         for (var j = 0; j < BOARD_SIZE; j++) {
             board[i][j] = SKY
-            // console.log('board:',board);
         }
     }
     return board
 }
 
 function renderBoard(board) {
-    let strHTML = ''
-    for (let i = 0; i < board.length; i++) {
+    var strHTML = ''
+    for (var i = 0; i < board.length; i++) {
         strHTML += '<tr>'
-        for (let j = 0; j < board[i].length; j++) {
+        for (var j = 0; j < board[i].length; j++) {
             const cell = board[i][j]
             const cellClass = i === board.length - 1 ? 'cell floor' : 'cell'
-            strHTML += `<td class="${cellClass}">${cell}</td>`
+            strHTML += `<td class="${cellClass} cell-${i}-${j}">${cell}</td>`
         }
         strHTML += '</tr>'
     }
@@ -62,13 +66,15 @@ function renderBoard(board) {
 function gameOver(isWin) {
     gGame.isOn = false
     clearInterval(gInvadersInterval)
-    const msg = isWin ? 'You Won' : 'Game Over!'
-    openModal(msg)
+    backgroundMusic.pause()
+    const message = isWin ? "You Won!" : "Game Over!"
+    openModal(message)
 }
 
-function openModal(msg) {
+
+function openModal(message) {
     document.querySelector('.modal').style.display = "block"
-    document.querySelector('.modal .msg').innerText = msg
+    document.querySelector('.modal .msg').innerText = message
 }
 
 function closeModal() {
@@ -90,11 +96,10 @@ function showMenu() {
 
 function checkGameOver() {
     const heroRow = gBoard.length - 2
-    for (var i = 0; i < BOARD_SIZE; i++) {
-        if (gBoard[heroRow][i] === INVADER) {
+    for (let j = 0; j < BOARD_SIZE; j++) {
+        if (gBoard[heroRow][j] === INVADER) {
             gameOver(false)
             return
         }
     }
 }
-

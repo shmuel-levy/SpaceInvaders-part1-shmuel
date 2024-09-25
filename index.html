@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <title>Space Invaders</title>
   </head>
   <body onload="init()" onkeyup="moveHero(event)">
@@ -16,19 +20,19 @@
       <h2>Aliens Remaining: <span class="aliens-count">0</span></h2>
       <div class="score">Score: <span class="count-score">0</span></div>
     </div>
-    <div class="modal-content">
-      <p class="msg"></p>
-      <button class="btn-modal" onclick="restartGame()">Restart</button>
+    <div class="modal" style="display: none;">
+      <div class="modal-content">
+          <p class="msg"></p>
+          <button class="restart-btn" onclick="restartGame()">Restart</button>
+      </div>
   </div>
     <table class="board-container" style="display: none;">
-        <tbody class="board"></tbody>
+      <tbody class="board"></tbody>
     </table>
     <script src="game.js"></script>
     <script src="hero.js"></script>
     <script src="invader.js"></script>
     <script src="utility.js"></script>
   </body>
-  <footer>©
-    this website was create by Shmuel ©
-</footer>
+  <footer>👾 this website was create by Shmuel 👾</footer>
 </html>

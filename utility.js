@@ -17,8 +17,9 @@ function createCell(gameObject = null) {
     }
 }
 
-function getElCell(pos) {
-    return document.querySelector(`[data-i='${pos.i}'][data-j='${pos.j}']`)
+function getElCell(pos, value) {
+    const elCell = document.querySelector(`.cell-${pos.i}-${pos.j}`)
+    elCell.innerHTML = value
 }
 
 function updateCell(board, pos, value) {
@@ -26,10 +27,9 @@ function updateCell(board, pos, value) {
     renderBoard(board)
 }
 
-function updateScore(score){
-   document.querySelector('.count-score').innerText = score
-        // elScore.innerText = score
-  
+function updateScore(score) {
+document.querySelector('.count-score').innerText = score
+    
 }
 
 function updateAliensCount(count) {
