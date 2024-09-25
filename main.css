@@ -6,7 +6,10 @@ html, body {
 }
 
 body {
-   background-color: #111011;
+    background-image: url('../images/stars.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     color: white;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
@@ -25,11 +28,9 @@ body {
     width: 100vw; */
 }
 
-/* h2 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-} */
-
+.headers{
+    font-size: 20px;
+}
 .cell {
     width: 60px;
     height: 40px;
@@ -91,3 +92,6 @@ body {
     background-color: rgb(180, 19, 19);
 }
 
+footer{
+    color: yellowgreen;
+}

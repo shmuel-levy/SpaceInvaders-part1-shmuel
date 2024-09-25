@@ -1,11 +1,11 @@
 'use strict'
 
-const PLAYER = '♆'
-const LASER = '⤊'
 var gHero = {
     pos: { i: 12, j: 5 },
     isShoot: false
 }
+
+var gLaserInterval
 
 function createHero(board) {
     gHero.pos.i = board.length - 2
@@ -14,26 +14,46 @@ function createHero(board) {
 }
 
 function moveHero(event) {
-    const playerPos = findPlayerPos()
-    // console.log('playerPos:',playerPos);
+    const playerPos = gHero.pos
     switch (event.key) {
         case 'ArrowLeft':
             if (playerPos.j > 0) {
-                updateCell(playerPos, EMPTY)
+                updateCell(gBoard, playerPos, SKY)
                 playerPos.j--
-                updateCell(playerPos, PLAYER)
+                updateCell(gBoard, playerPos, PLAYER)
             }
             break
-            case 'ArrowRight':
-                if(playerPos.j<BOARD_SIZE-1){
-                    updateCell(playerPos,EMPTY)
-                    playerPos.j++
-                    updateCell(playerPos,PLAYER)
-                }
-                break
+        case 'ArrowRight':
+            if (playerPos.j < BOARD_SIZE - 1) {
+                updateCell(gBoard, playerPos, SKY)
+                playerPos.j++
+                updateCell(gBoard, playerPos, PLAYER)
+            }
+            break
+        case ' ':
+            if (!gHero.isShoot) {
+                shoot(playerPos)
+            }
+            break
     }
 }
 
-function findPlayerPos(){
-    return gHero.pos
+function shoot(playerPos) {
+    if (gHero.isShoot) return
+    gHero.isShoot = true
+    var laserPos = { i: playerPos.i - 1, j: playerPos.j }
+    
+    gLaserInterval = setInterval(() => {
+        updateCell(gBoard, laserPos, SKY)
+        laserPos.i--
+        if (laserPos.i < 0 || gBoard[laserPos.i][laserPos.j] === INVADER) {
+            clearInterval(gLaserInterval)
+            gHero.isShoot = false
+            if (laserPos.i >= 0 && gBoard[laserPos.i][laserPos.j] === INVADER) {
+                handleAlienHit(gBoard, laserPos)
+            }
+            return
+        }
+        updateCell(gBoard, laserPos, LASER)
+    }, 100)
 }
